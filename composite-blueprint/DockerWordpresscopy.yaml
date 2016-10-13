@@ -1,0 +1,116 @@
+id: DockerWordpresscopy
+name: Puppet Wordpress
+description: Wordpress deployed using a Puppet Modules.
+status: PUBLISHED
+components:
+  CentOS:
+    type: Infrastructure.CatalogItem.Machine.Virtual.vSphere
+    data:
+      _cluster:
+        fixed: 1
+        min: 1
+      action:
+        fixed: LinkedClone
+      allow_storage_policies:
+        fixed: false
+      blueprint_type:
+        fixed: '1'
+      cpu:
+        fixed: 1
+        min: 1
+      disks:
+      - capacity: 3
+        custom_properties: null
+        id: 1449256159738
+        initial_location: ''
+        is_clone: true
+        label: Hard disk 1
+        storage_reservation_policy: ''
+        userCreated: false
+        volumeId: 0
+      display_location:
+        fixed: false
+      guest_customization_specification: CentOS
+      machine_prefix:
+        fixed:
+          id: dev-
+      max_network_adapters: {}
+      max_volumes: {}
+      memory:
+        fixed: 512
+        min: 512
+      nics:
+      - address: ''
+        assignment_type: Static
+        id: 0
+        load_balancing: ''
+        network: ${_resource~External192168110}
+        network_profile: External/192.168.110
+      provisioning_workflow:
+        fixed:
+          id: CloneWorkflow
+          label: CloneWorkflow
+      security_groups: []
+      security_tags: []
+      source_machine:
+        fixed:
+          id: 93f30417-e149-461f-afa6-c648ef49018f
+          label: linux-base-01a
+      source_machine_external_snapshot:
+        fixed: 4
+      source_machine_name:
+        fixed: linux-base-01a
+      source_machine_vmsnapshot:
+        fixed:
+          id: '4'
+      storage:
+        fixed: 3
+        min: 3
+  External192168110:
+    type: Infrastructure.Network.Network.Existing
+    data:
+      name:
+        fixed: External192168110
+      network_profile:
+        fixed: External/192.168.110
+  Puppet_Node_Classification_1:
+    type: f3c037f1-f6aa-4268-bcbf-aedec30961b4
+    data:
+      classNames:
+        default:
+        - apache
+        - apache::mod::php
+        - apache::php
+        - mysql::bindings::php
+        - mysql::client
+        - mysql::server
+        - stdlib
+        - wordpress
+        editable: true
+        refreshOnChange: false
+      classParameters:
+        default:
+        - name: wordpress::install_dir
+          value: /var/www/html
+        editable: true
+        refreshOnChange: false
+      replaceAssignedClasses:
+        default: true
+        editable: true
+        refreshOnChange: false
+      vm:
+        editable: true
+        fixed: ${_resource~CentOS~MachineName}
+        refreshOnChange: false
+        visible: false
+  System_Configuration_1:
+    type: Software.SystemConfiguration
+    dependsOn:
+    - Puppet_Node_Classification_1
+    data:
+      host: ${_resource~CentOS}
+layout:
+  CentOS: 0,1
+  External192168110: 1,0
+  Puppet_Node_Classification_1: 0,0
+  System_Configuration_1: 0,0

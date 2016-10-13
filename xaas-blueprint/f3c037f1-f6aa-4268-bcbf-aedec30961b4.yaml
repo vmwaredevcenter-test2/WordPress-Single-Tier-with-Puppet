@@ -1,0 +1,386 @@
+id:
+  id: "f3c037f1-f6aa-4268-bcbf-aedec30961b4"
+workflowId: "0846b1e3-28a8-4934-bd24-63208a2d621e"
+name: "Puppet Node Classification"
+description: "A workflow that can perform node classification with multiple classes\
+  \ and parameters. The workflow also performs on-demand node remediation."
+catalogRequestInfoHidden: false
+forms:
+- id: "891a976d-6e61-49be-b3ea-d7da58583aa4"
+  form:
+    name: "Request form"
+    designerLayout:
+      pages:
+      - id: "step0"
+        label: "Classification Information"
+        sections:
+        - id: "__ASD_PRESENTATION_INSTANCE_SECTION"
+          rows:
+          - items:
+            - type: "field"
+              size: 2
+              id: "__ASD_PRESENTATION_INSTANCE"
+              dataType:
+                type: "primitive"
+                typeId: "STRING"
+              state:
+                dependencies: []
+                facets:
+                - type: "visible"
+                  value:
+                    type: "constantClause"
+                    value:
+                      type: "boolean"
+                      value: false
+                - type: "derivedValue"
+                  value:
+                    type: "callback"
+                - type: "editable"
+                  value:
+                    type: "constant"
+                    value:
+                      type: "boolean"
+                      value: false
+              initialStaticState:
+                dependencies: []
+                facets: []
+              labelDisplaySize: 0
+              columns: []
+              customField: false
+              errors: []
+              staticField: false
+              refreshOnChange: false
+              isMultiValued: false
+          designerHidden: true
+          state:
+            dependencies: []
+            facets:
+            - type: "visible"
+              value:
+                type: "constantClause"
+                value:
+                  type: "boolean"
+                  value: false
+        - rows:
+          - items:
+            - type: "field"
+              size: 2
+              id: "vm"
+              label: "vm"
+              description: "vm"
+              dataType:
+                type: "primitive"
+                typeId: "STRING"
+              state:
+                dependencies: []
+                facets:
+                - type: "editable"
+                  value:
+                    type: "constant"
+                    value:
+                      type: "boolean"
+                      value: true
+                - type: "refreshOnChange"
+                  value:
+                    type: "constant"
+                    value:
+                      type: "boolean"
+                      value: false
+              initialStaticState:
+                dependencies: []
+                facets:
+                - type: "visible"
+                  value:
+                    type: "constantClause"
+                    value:
+                      type: "boolean"
+                      value: true
+              labelDisplaySize: 2
+              columns: []
+              customField: false
+              errors: []
+              staticField: false
+              refreshOnChange: false
+              isMultiValued: false
+          - items:
+            - type: "field"
+              size: 2
+              id: "environment"
+              label: "Environment"
+              description: "Environment"
+              dataType:
+                type: "primitive"
+                typeId: "STRING"
+              state:
+                dependencies: []
+                facets:
+                - type: "editable"
+                  value:
+                    type: "constant"
+                    value:
+                      type: "boolean"
+                      value: true
+                - type: "refreshOnChange"
+                  value:
+                    type: "constant"
+                    value:
+                      type: "boolean"
+                      value: false
+              initialStaticState:
+                dependencies: []
+                facets:
+                - type: "defaultValue"
+                  value:
+                    type: "constant"
+                    value:
+                      type: "string"
+                      value: "production"
+                - type: "visible"
+                  value:
+                    type: "constantClause"
+                    value:
+                      type: "boolean"
+                      value: true
+                - type: "regex"
+                  value:
+                    type: "constant"
+                    value:
+                      type: "string"
+                      value: "^((?!^main$|^master$|^agent$|^user$)\\S)+$"
+                  errorMessage: "Value should match [^((?!^main$|^master$|^agent$|^user$)\\\
+                    S)+$]"
+                - type: "mandatory"
+                  value:
+                    type: "constantClause"
+                    value:
+                      type: "boolean"
+                      value: true
+              labelDisplaySize: 2
+              columns: []
+              customField: false
+              errors: []
+              staticField: false
+              refreshOnChange: false
+              isMultiValued: false
+          - items:
+            - type: "field"
+              size: 2
+              id: "classNames"
+              label: "classNames"
+              description: "classNames"
+              dataType:
+                type: "primitive"
+                typeId: "STRING"
+              displayAdvice: "TEXTBOX"
+              state:
+                dependencies: []
+                facets:
+                - type: "defaultValue"
+                  value:
+                    type: "constant"
+                    value:
+                      type: "multiple"
+                      elementTypeId: "STRING"
+                      items:
+                      - type: "string"
+                        value: "four"
+                      - type: "string"
+                        value: "five"
+                      - type: "string"
+                        value: "six"
+                - type: "editable"
+                  value:
+                    type: "constant"
+                    value:
+                      type: "boolean"
+                      value: true
+                - type: "refreshOnChange"
+                  value:
+                    type: "constant"
+                    value:
+                      type: "boolean"
+                      value: false
+              initialStaticState:
+                dependencies: []
+                facets: []
+              labelDisplaySize: 2
+              columns: []
+              customField: false
+              errors: []
+              staticField: false
+              refreshOnChange: false
+              isMultiValued: true
+          - items:
+            - type: "field"
+              size: 2
+              id: "classParameters"
+              label: "Class Parameters"
+              description: "Class Parameters"
+              dataType:
+                type: "complex"
+                classId: "vco_composite"
+              displayAdvice: "DATA_TABLE"
+              state:
+                dependencies: []
+                facets:
+                - type: "editable"
+                  value:
+                    type: "constant"
+                    value:
+                      type: "boolean"
+                      value: true
+                - type: "refreshOnChange"
+                  value:
+                    type: "constant"
+                    value:
+                      type: "boolean"
+                      value: false
+              initialStaticState:
+                dependencies: []
+                facets:
+                - type: "visible"
+                  value:
+                    type: "constantClause"
+                    value:
+                      type: "boolean"
+                      value: true
+              labelDisplaySize: 2
+              columns:
+              - type: "field"
+                size: 2
+                id: "name"
+                label: "name"
+                dataType:
+                  type: "primitive"
+                  typeId: "STRING"
+                state:
+                  dependencies: []
+                  facets:
+                  - type: "refreshOnChange"
+                    value:
+                      type: "constant"
+                      value:
+                        type: "boolean"
+                        value: false
+                initialStaticState:
+                  dependencies: []
+                  facets:
+                  - type: "visible"
+                    value:
+                      type: "constantClause"
+                      value:
+                        type: "boolean"
+                        value: true
+                labelDisplaySize: 2
+                columns: []
+                customField: false
+                errors: []
+                staticField: false
+                refreshOnChange: false
+                isMultiValued: false
+              - type: "field"
+                size: 2
+                id: "value"
+                label: "value"
+                dataType:
+                  type: "primitive"
+                  typeId: "STRING"
+                state:
+                  dependencies: []
+                  facets:
+                  - type: "refreshOnChange"
+                    value:
+                      type: "constant"
+                      value:
+                        type: "boolean"
+                        value: false
+                initialStaticState:
+                  dependencies: []
+                  facets:
+                  - type: "visible"
+                    value:
+                      type: "constantClause"
+                      value:
+                        type: "boolean"
+                        value: true
+                labelDisplaySize: 2
+                columns: []
+                customField: false
+                errors: []
+                staticField: false
+                refreshOnChange: false
+                isMultiValued: false
+              customField: false
+              errors: []
+              staticField: false
+              refreshOnChange: false
+              isMultiValued: true
+          - items:
+            - type: "field"
+              size: 2
+              id: "replaceAssignedClasses"
+              label: "Replace Assigned Classes"
+              description: "Replace Assigned Classes"
+              dataType:
+                type: "primitive"
+                typeId: "BOOLEAN"
+              state:
+                dependencies: []
+                facets:
+                - type: "editable"
+                  value:
+                    type: "constant"
+                    value:
+                      type: "boolean"
+                      value: true
+                - type: "refreshOnChange"
+                  value:
+                    type: "constant"
+                    value:
+                      type: "boolean"
+                      value: false
+              initialStaticState:
+                dependencies: []
+                facets:
+                - type: "visible"
+                  value:
+                    type: "constantClause"
+                    value:
+                      type: "boolean"
+                      value: true
+                - type: "defaultValue"
+                  value:
+                    type: "constant"
+                    value:
+                      type: "boolean"
+                      value: false
+              labelDisplaySize: 2
+              columns: []
+              customField: false
+              errors: []
+              staticField: false
+              refreshOnChange: false
+              isMultiValued: false
+          designerHidden: false
+          state:
+            dependencies: []
+            facets: []
+        state:
+          dependencies: []
+          facets:
+          - type: "visible"
+            value:
+              type: "constantClause"
+              value:
+                type: "boolean"
+                value: true
+  scenario:
+    usageClass: "SubmitUsage"
+    id: "Request.Submit"
+status: "PUBLISHED"
+statusName: "Published"
+version:
+  version: "0.0.1"
+  major: 0
+  minor: 0
+  micro: 1

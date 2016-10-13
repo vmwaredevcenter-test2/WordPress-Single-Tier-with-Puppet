@@ -1,0 +1,14 @@
+name: "Puppet"
+productVersion: "7.0.0-SNAPSHOT"
+data:
+- locator: "xaas-blueprint/f3c037f1-f6aa-4268-bcbf-aedec30961b4.yaml"
+  name: "Puppet Node Classification"
+- locator: "composite-blueprint/DockerWordpresscopy.yaml"
+  name: "Puppet Wordpress"
+  description: "Puppet Wordpress"
+  dependencies:
+  - "xaas-blueprint/f3c037f1-f6aa-4268-bcbf-aedec30961b4.yaml"
+  - "software-component/Software.SystemConfiguration.yaml"
+- locator: "software-component/Software.SystemConfiguration.yaml"
+  name: "System Configuration"
+exportTime: "2015-12-21T23:24:32.507Z"
